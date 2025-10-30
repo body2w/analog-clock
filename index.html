@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analog Clock</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        height: 100vh;
+        background: #f0f0f0;
+      }
+
+      .clock-body {
+        background-color: #fff;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        position: relative;
+        border: 10px solid #303030;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .clock-body div {
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        color: #303030;
+        font-weight: bold;
+      }
+
+      /* أرقام الساعة */
+      .twelve {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+      }
+      .one {
+        top: 35px;
+        right: 75px;
+        position: absolute;
+      }
+      .two {
+        top: 75px;
+        right: 35px;
+        position: absolute;
+      }
+      .three {
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+      }
+      .four {
+        bottom: 75px;
+        right: 35px;
+        position: absolute;
+      }
+      .five {
+        bottom: 35px;
+        right: 75px;
+        position: absolute;
+      }
+      .six {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+      }
+      .seven {
+        bottom: 35px;
+        left: 75px;
+        position: absolute;
+      }
+      .eight {
+        bottom: 75px;
+        left: 35px;
+        position: absolute;
+      }
+      .nine {
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        position: absolute;
+      }
+      .ten {
+        top: 75px;
+        left: 35px;
+        position: absolute;
+      }
+      .eleven {
+        top: 35px;
+        left: 75px;
+        position: absolute;
+      }
+
+      /* العقارب */
+      .hours-hand,
+      .minutes-hand,
+      .seconds-hand {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: bottom center;
+        transform: rotate(0deg);
+      }
+
+      .hours-hand {
+        width: 6px;
+        height: 70px;
+        background-color: #303030;
+        border-radius: 6px;
+      }
+
+      .minutes-hand {
+        width: 4px;
+        height: 90px;
+        background-color: #505050;
+        border-radius: 4px;
+      }
+
+      .seconds-hand {
+        width: 2px;
+        height: 100px;
+        background-color: red;
+        border-radius: 2px;
+        transition: transform 0.1s linear;
+      }
+
+      .dot {
+        width: 12px;
+        height: 12px;
+        background-color: #303030;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="clock-body">
+      <div class="twelve">12</div>
+      <div class="one">1</div>
+      <div class="two">2</div>
+      <div class="three">3</div>
+      <div class="four">4</div>
+      <div class="five">5</div>
+      <div class="six">6</div>
+      <div class="seven">7</div>
+      <div class="eight">8</div>
+      <div class="nine">9</div>
+      <div class="ten">10</div>
+      <div class="eleven">11</div>
+      <div class="hours-hand"></div>
+      <div class="minutes-hand"></div>
+      <div class="seconds-hand"></div>
+      <div class="dot"></div>
+    </div>
+
+    <script>
+      setInterval(function () {
+        const d = new Date();
+        const hours = d.getHours();
+        const minutes = d.getMinutes();
+        const seconds = d.getSeconds() + d.getMilliseconds() / 1000; // ← هنا السر
+
+        const hoursDeg = (hours % 12) * 30 + minutes * 0.5;
+        const minutesDeg = minutes * 6 + seconds * 0.1;
+        const secondsDeg = seconds * 6;
+
+        document.querySelector(
+          ".hours-hand"
+        ).style.transform = `translate(-50%, -100%) rotate(${hoursDeg}deg)`;
+        document.querySelector(
+          ".minutes-hand"
+        ).style.transform = `translate(-50%, -100%) rotate(${minutesDeg}deg)`;
+        document.querySelector(
+          ".seconds-hand"
+        ).style.transform = `translate(-50%, -100%) rotate(${secondsDeg}deg)`;
+      }, 100);
+    </script>
+  </body>
+</html>
