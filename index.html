@@ -167,7 +167,8 @@
         const d = new Date();
         const hours = d.getHours();
         const minutes = d.getMinutes();
-        const seconds = d.getSeconds() + d.getMilliseconds() / 1000; // ← هنا السر
+        const seconds = d.getSeconds() + d.getMilliseconds() / 1000;
+        var tic = new Audio("tic.mp3");
 
         const hoursDeg = (hours % 12) * 30 + minutes * 0.5;
         const minutesDeg = minutes * 6 + seconds * 0.1;
@@ -182,6 +183,7 @@
         document.querySelector(
           ".seconds-hand"
         ).style.transform = `translate(-50%, -100%) rotate(${secondsDeg}deg)`;
+        tic.play();
       }, 1000);
     </script>
   </body>
